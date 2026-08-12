@@ -10,18 +10,24 @@ const allBtn = document.getElementById('select');
 const todoList = document.getElementById('todoList');
 allBtn.addEventListener('change' , filterTodo);
 function filterTodo() {
-   if (allBtn.value === "all") {
-        alert(getAllTask().join("\n"));
+  const todos = todoList.querySelectorAll('li');
+  todos.forEach((todo) =>{
+    const span = todo.querySelector('span');
+    const isCompleted = span.classList.contains('completed');
+     if (allBtn.value === "all") {
+        todo.style.display = "flex";
     }
 
     if (allBtn.value === "complete") {
-        alert(getCompletedTask().join("\n"));
+        todo.style.display = isCompleted ? "flex": "none";
     }
 
     if (allBtn.value === "pend") {
-        alert(getPendingTask().join("\n"));
+        todo.style.display = !isCompleted ? "flex" : "none";
     }
 
+  })
+  
 }
 
 function getAllTask() {
